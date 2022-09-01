@@ -1,4 +1,7 @@
+//storing api url into a variable
 const url = "https://jsonplaceholder.typicode.com/todos";
+
+// fetching all the todo's
 module.exports.fetchTodo = async function () {
   let data = [];
   try {
@@ -16,6 +19,7 @@ module.exports.fetchTodo = async function () {
   }
 };
 
+// function for creating new Task's
 module.exports.addTaskHandler = async function (title, userId) {
   try {
     const response = await fetch(url, {
@@ -35,6 +39,7 @@ module.exports.addTaskHandler = async function (title, userId) {
       data,
     };
   } catch (error) {
+    // catching an error
     return {
       success: false,
       message: error.message,
@@ -42,6 +47,7 @@ module.exports.addTaskHandler = async function (title, userId) {
   }
 };
 
+// deleting a Task
 module.exports.deleteTask = async function (id) {
   try {
     const response = await fetch(url + `/${id}`, {
@@ -58,6 +64,7 @@ module.exports.deleteTask = async function (id) {
   }
 };
 
+// updating a Task
 module.exports.updateTask = async function (task) {
   try {
     const response = await fetch(url + `/${task.id}`, {

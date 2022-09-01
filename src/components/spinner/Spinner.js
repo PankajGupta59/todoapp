@@ -1,5 +1,7 @@
+// importing React from react package
 import React from "react";
 
+// creating a spinner using bootstrap
 const Spinner = () => {
   return (
     <div className="d-flex justify-content-center">
@@ -10,4 +12,5 @@ const Spinner = () => {
   );
 };
 
+// exporting the spinner Component
 export default Spinner;

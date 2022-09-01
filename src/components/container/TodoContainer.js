@@ -1,19 +1,29 @@
+// requiring all librarires
 import React, { useEffect, useState } from "react";
 import { Store } from "react-notifications-component";
+
+// importing all files
 import { addTaskHandler, deleteTask, fetchTodo, updateTask } from "../../api";
 import AddTask from "../addTask/AddTask";
 import Spinner from "../spinner/Spinner";
 import ShowTask from "../showTask/ShowTask";
 import Classes from "./TodoContainer.module.css";
 import "react-notifications-component/dist/theme.css";
+
+// creating a functional Component as a Todo container
 const TodoContainer = () => {
+  // setting up loading state
   const [isLoading, setisLoading] = useState(true);
+  // setting up todo state
   const [Todo, setTodo] = useState([]);
+  // setting up editing state
   const [isEdit, setisEdit] = useState({
     edit: false,
     task: {},
   });
-  const userId = 10;
+  // setting up the userId
+  const userId = 1;
+  // making a notification variable for react notifications
   const notifications = {
     insert: "top",
     container: "top-right",
@@ -24,6 +34,7 @@ const TodoContainer = () => {
       onScreen: true,
     },
   };
+  // adding a functionality of competing a task
   async function completed(task) {
     const index = Todo.findIndex((elm) => {
       return elm.id === task.id;
@@ -32,6 +43,7 @@ const TodoContainer = () => {
       prev[index].completed = true;
       return [...prev];
     });
+    // setting up notification
     Store.addNotification({
       title: "Congratulations",
       message: "Task Completed Succesfully",
@@ -39,6 +51,7 @@ const TodoContainer = () => {
       ...notifications,
     });
   }
+  // setting up function for updating the task
   async function updateHandler(task, requested) {
     if (requested) {
       setisEdit({
@@ -74,6 +87,7 @@ const TodoContainer = () => {
       task: {},
     });
   }
+  // setting up functions for deleting a particular task
   async function deleteHandler(id) {
     Store.addNotification({
       title: "In Progress",
@@ -102,6 +116,7 @@ const TodoContainer = () => {
       });
     }
   }
+  //adding functionalty for adding a new todo task
   async function addData(title) {
     Store.addNotification({
       title: "In Progress",
@@ -127,6 +142,7 @@ const TodoContainer = () => {
       });
     }
   }
+  // using a useEffect hook for fecthing and getting all the todo after the component renders
   useEffect(() => {
     async function post() {
       Store.addNotification({
@@ -153,13 +169,17 @@ const TodoContainer = () => {
   }, []);
 
   return (
+    // container for todo app
     <div className={Classes.container}>
+      {/* heading */}
       <h1>TODO APP</h1>
+      {/* component for adding a task */}
       <AddTask
         addtask={addData}
         isEdit={isEdit}
         updateHandler={updateHandler}
       />
+      {/* component for rendering the tasks */}
       {isLoading ? (
         <Spinner />
       ) : (
@@ -174,4 +194,5 @@ const TodoContainer = () => {
   );
 };
 
+// exporting the component by default
 export default TodoContainer;
