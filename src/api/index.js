@@ -11,49 +11,71 @@ module.exports.fetchTodo = async function () {
   } catch (error) {
     return {
       success: false,
+      message: error.message,
     };
   }
 };
 
 module.exports.addTaskHandler = async function (title, userId) {
-  const response = await fetch(url, {
-    method: "POST",
-    body: JSON.stringify({
-      title,
-      userId,
-      completed: false,
-    }),
-    headers: {
-      "Content-type": "application/json; charset=UTF-8",
-    },
-  });
-  const data = await response.json();
-  return {
-    success: true,
-    data,
-  };
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      body: JSON.stringify({
+        title,
+        userId,
+        completed: false,
+      }),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    });
+    const data = await response.json();
+    return {
+      success: true,
+      data,
+    };
+  } catch (error) {
+    return {
+      success: false,
+      message: error.message,
+    };
+  }
 };
 
 module.exports.deleteTask = async function (id) {
-  const response = await fetch(url + `/${id}`, {
-    method: "DELETE",
-  });
-  return {
-    success: true,
-  };
+  try {
+    const response = await fetch(url + `/${id}`, {
+      method: "DELETE",
+    });
+    return {
+      success: true,
+    };
+  } catch (error) {
+    return {
+      success: false,
+      message: error.message,
+    };
+  }
 };
 
 module.exports.updateTask = async function (task) {
-  const response = await fetch(url + `/${task.id}`, {
-    method: "PATCH",
-    body: JSON.stringify(task),
-    headers: {
-      "Content-type": "application/json; charset=UTF-8",
-    },
-  });
-  const data = await response.json();
-  return {
-    success: true,
-    data,
-  };
+  try {
+    const response = await fetch(url + `/${task.id}`, {
+      method: "PATCH",
+      body: JSON.stringify(task),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    });
+    const data = await response.json();
+    return {
+      success: true,
+      data,
+    };
+  } catch (error) {
+    return {
+      success: false,
+      message: error.message,
+    };
+  }
 };
