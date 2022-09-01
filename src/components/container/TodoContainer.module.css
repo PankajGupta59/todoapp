@@ -12,5 +12,6 @@
   color: rgba(92, 85, 85, 0.719);
   font-family: "Courier New", Courier, monospace;
   font-size: 2.8rem;
+  font-weight: 600;
   text-shadow: 5px 5px lightgray;
 }

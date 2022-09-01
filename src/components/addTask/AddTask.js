@@ -1,16 +1,39 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Classes from "./AddTask.module.css";
-const AddTask = () => {
+const AddTask = (props) => {
+  const title = useRef();
+  useEffect(() => {
+    title.current.value = props.isEdit.edit ? props.isEdit.task.title : "";
+  }, [props.isEdit]);
   return (
     <div className={Classes.taskContainer}>
-      <form>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          props.addtask(title.current.value);
+          title.current.value = "";
+        }}
+      >
         <div>
           <label>Title: </label>
           <br />
-          <input type="text" required />
+          <input ref={title} type="text" required />
         </div>
         <div>
-          <button type="submit">ADD TASK</button>
+          {props.isEdit.edit ? (
+            <button
+              type="button"
+              onClick={() => {
+                const task = props.isEdit.task;
+                task.title = title.current.value;
+                props.updateHandler(task, false);
+              }}
+            >
+              Save
+            </button>
+          ) : (
+            <button type="submit">ADD TASK</button>
+          )}
         </div>
       </form>
     </div>
