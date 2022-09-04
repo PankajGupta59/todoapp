@@ -3,7 +3,12 @@ import React, { useEffect, useState } from "react";
 import { Store } from "react-notifications-component";
 
 // importing all files
-import { addTaskHandler, deleteTask, fetchTodo, updateTask } from "../../api";
+import {
+  addTaskHandler,
+  deleteTask,
+  fetchTodo,
+  updateTask,
+} from "../../api/index.js";
 import AddTask from "../addTask/AddTask";
 import Spinner from "../spinner/Spinner";
 import ShowTask from "../showTask/ShowTask";

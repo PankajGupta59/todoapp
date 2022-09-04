@@ -2,7 +2,7 @@
 const url = "https://jsonplaceholder.typicode.com/todos";
 
 // fetching all the todo's
-module.exports.fetchTodo = async function () {
+export const fetchTodo = async function () {
   let data = [];
   try {
     const response = await fetch(url + "?userId=1");
@@ -20,7 +20,7 @@ module.exports.fetchTodo = async function () {
 };
 
 // function for creating new Task's
-module.exports.addTaskHandler = async function (title, userId) {
+export const addTaskHandler = async function (title, userId) {
   try {
     const response = await fetch(url, {
       method: "POST",
@@ -48,7 +48,7 @@ module.exports.addTaskHandler = async function (title, userId) {
 };
 
 // deleting a Task
-module.exports.deleteTask = async function (id) {
+export const deleteTask = async function (id) {
   try {
     const response = await fetch(url + `/${id}`, {
       method: "DELETE",
@@ -65,7 +65,7 @@ module.exports.deleteTask = async function (id) {
 };
 
 // updating a Task
-module.exports.updateTask = async function (task) {
+export const updateTask = async function (task) {
   try {
     const response = await fetch(url + `/${task.id}`, {
       method: "PATCH",
